@@ -27,8 +27,9 @@ mount() {
 rebuild() {
     mkdir $tmpdir
     echo "Rebuilding $PARTITION as ext4 image..."
-    cp -fpr $(sudo find | grep plat_file_contexts) tmp/
-    sudo python $toolsdir/mkuserimg_mke2fs.py "$PARTITION/" "$NEWIMAGE" ext4 "/" 4096M tmp/plat_file_contexts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0"
+    cp -fpr $(sudo find | grep plat_file_contexts) $tmpdir
+    imagesize=`du -sk $PARTITION | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
+    sudo python $toolsdir/mkuserimg_mke2fs.py "$PARTITION/" "$NEWIMAGE" ext4 "/" $imagesize tmp/plat_file_contexts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0"
     sudo umount -f -l $PARTITION
     rm -rf $PARTITION 
     sudo rm -rf $tmpdir
