@@ -4,7 +4,7 @@ IMAGE=$(realpath $1)
 PARTITION=$2
 EXTRAOPT=$3
 
-NEWIMAGE=$PARTITION_ext4.img
+NEWIMAGE="$PARTITION-ext4.img"
 LOCALDIR=`cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd`
 MOUNTDIR="$LOCALDIR/$PARTITION"
 toolsdir="$LOCALDIR/tools"
