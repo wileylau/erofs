@@ -34,18 +34,18 @@ mount() {
 }
 
 contextfix() {
-    echo "/my_bigball                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_carrier                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_company                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_engineering                u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_heytap                     u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_manifest                   u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_preload                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_product                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_region                     u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_stock                      u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/my_version                    u:object_r:rootfs:s0" >> "$fileconts"
-    echo "/special_preload               u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_bigball(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_carrier(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_company(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_engineering(/.*)?                u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_heytap(/.*)?                     u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_manifest(/.*)?                   u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_preload(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_product(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_region(/.*)?                     u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_stock(/.*)?                      u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/my_version(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/special_preload(/.*)?               u:object_r:rootfs:s0" >> "$fileconts"
     if [[ $PARTITION != "system" ]]; then
         mkdir $LOCALDIR/system
         sudo mount -o loop -t erofs $RUNDIR/system.img $LOCALDIR/system
