@@ -16,6 +16,10 @@ sudo ./erofs.sh product.img product
 
 - all images (especially system) must be the dir that the script is ran.
 
+### To-Do ###
+
+- Remove dependency of system file_contexts to build all images (we currently cat system filecontexts to the working file contexts to make the image resign properly)
+
 ### Credits and Thanks ###
 
 [Amack](https://github.com/amackpro)
