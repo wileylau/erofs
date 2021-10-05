@@ -44,7 +44,11 @@ shrink() {
 
 if [[ $3 == "-m" ]]; then # mount only
     mount
+elif [[ $3 == "-dr" ]]; then # rebuild only
+    mount
+    rebuild
 else
     mount
     rebuild
+    shrink
 fi
