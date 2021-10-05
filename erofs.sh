@@ -2,7 +2,7 @@
 
 IMAGE=$(realpath $1)
 PARTITION=$2
-EXTRAOPT=$3
+SIZE=$3
 
 NEWIMAGE="$PARTITION-ext4.img"
 LOCALDIR=`cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd`
@@ -11,6 +11,12 @@ MOUNTDIR="$LOCALDIR/$PARTITION"
 toolsdir="$LOCALDIR/tools"
 tmpdir="$LOCALDIR/tmp"
 fileconts="$tmpdir/plat_file_contexts"
+
+if [[ $3 == "" ]]; then
+    SIZE=4294967296
+else
+    SIZE=$3
+fi
 
 usage() {
     echo "sudo ./$0 <image path> <partition name>"
@@ -56,9 +62,9 @@ rebuild() {
     contextfix
     imagesize=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
     if [[ $PARTITION == "system" ]]; then
-        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" 4294967296 $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0"
+        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0"
     else
-        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" 4294967296 $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0"
+        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0"
     fi
     sudo umount -f -l $MOUNTDIR
     rm -rf $MOUNTDIR 
@@ -70,13 +76,11 @@ shrink() {
     resize2fs -M $NEWIMAGE
 }
 
-if [[ $3 == "-m" ]]; then # mount only
-    mount
-elif [[ $3 == "-dr" ]]; then # rebuild only
-    mount
-    rebuild
-else
+if [[ $3 == "" ]]; then
     mount
     rebuild
     shrink
+else
+    mount
+    rebuild
 fi
