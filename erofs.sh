@@ -1,12 +1,13 @@
 #!/bin/bash
 
-PARTITION=$1
-EXTRAOPT=$2
+IMAGE=$(realpath $1)
+PARTITION=$2
+EXTRAOPT=$3
 
 NEWIMAGE=$PARTITION_ext4.img
 
 usage() {
-    echo "sudo ./$0 <partition name>"
+    echo "sudo ./$0 <image path> <partition name>"
 }
 
 if [[ $1 == "" ]]; then 
@@ -16,7 +17,7 @@ fi
 mount() {
     mkdir $PARTITION
     echo "Mounting $PARTITION..."
-    sudo mount -t erofs -o loop $PARTITION.img $PARTITION 
+    sudo mount -t erofs -o loop $IMAGE $PARTITION 
 }
 
 rebuild() {
@@ -28,7 +29,7 @@ rebuild() {
     rm -rf $PARTITION/
 }
 
-if [[ $2 == "-m" ]]; then # mount only
+if [[ $3 == "-m" ]]; then # mount only
     mount
 else
     mount
