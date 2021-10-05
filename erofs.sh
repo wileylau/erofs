@@ -32,5 +32,5 @@ if [[ $2 == "-m" ]]; then # mount only
     mount
 else
     mount
-    # rebuild
+    rebuild
 fi
