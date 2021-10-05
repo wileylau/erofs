@@ -12,6 +12,10 @@ For example, if I'm trying to make product.img ext4, I'll use the following comm
 sudo ./erofs.sh product.img product
 `
 
+### Notes ###
+
+- all images (especially system) must be the dir that the script is ran.
+
 ### Credits and Thanks ###
 
 [Amack](https://github.com/amackpro)
