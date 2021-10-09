@@ -6,7 +6,7 @@ SIZE=$3
 
 NEWIMAGE="$PARTITION-ext4.img"
 LOCALDIR=`cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd`
-RUNDIR=$(realpath .)
+RUNDIR=$(dirname $1)
 MOUNTDIR="$LOCALDIR/$PARTITION"
 toolsdir="$LOCALDIR/tools"
 tmpdir="$LOCALDIR/tmp"
