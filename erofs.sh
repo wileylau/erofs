@@ -64,7 +64,7 @@ contextfix() {
 rebuild() {
     mkdir $tmpdir
     echo "[INFO] Rebuilding $PARTITION as ext4 image..."
-    cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/ >> log.txt
+    cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/ >/dev/null 2>&1 
     contextfix
     imagesize=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
     if [[ $PARTITION == "system" ]]; then
