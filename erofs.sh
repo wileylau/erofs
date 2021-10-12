@@ -85,7 +85,7 @@ shrink() {
 if [[ $3 == "" ]]; then
     mount
     rebuild
-    shrink
+    shrink >/dev/null 2>&1 
 else
     mount
     rebuild
