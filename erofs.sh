@@ -3,6 +3,7 @@
 IMAGE=$(realpath $1)
 PARTITION=$2
 SIZE=$3
+DEBUG=$4
 
 NEWIMAGE="$PARTITION-ext4.img"
 LOCALDIR=`cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd`
@@ -46,6 +47,9 @@ contextfix() {
     echo "/my_stock(/.*)?                      u:object_r:rootfs:s0" >> "$fileconts"
     echo "/my_version(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/special_preload(/.*)?               u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/preavs(/.*)?                        u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/preload(/.*)?                       u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/version(/.*)?                       u:object_r:rootfs:s0" >> "$fileconts"
     if [[ $PARTITION != "system" ]]; then
         mkdir $LOCALDIR/system
         sudo mount -o loop -t erofs $RUNDIR/system.img $LOCALDIR/system
