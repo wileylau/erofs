@@ -85,7 +85,9 @@ shrink() {
 if [[ $3 == "" ]]; then
     mount
     rebuild
+    echo "[INFO] Shrinking images..."
     shrink >/dev/null 2>&1 
+    echo "[INFO] Done!"
 else
     mount
     rebuild
