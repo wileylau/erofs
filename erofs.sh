@@ -29,7 +29,7 @@ fi
 mount() {
     sudo rm -rf $tmpdir $MOUNTDIR
     mkdir $MOUNTDIR
-    echo "Mounting $PARTITION..."
+    echo "[INFO] Mounting $PARTITION..."
     sudo mount -t erofs -o loop $IMAGE $MOUNTDIR 
 }
 
@@ -57,14 +57,14 @@ contextfix() {
 
 rebuild() {
     mkdir $tmpdir
-    echo "Rebuilding $PARTITION as ext4 image..."
-    cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/
+    echo "[INFO] Rebuilding $PARTITION as ext4 image..."
+    cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/ >> /dev/null
     contextfix
     imagesize=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
     if [[ $PARTITION == "system" ]]; then
-        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0"
+        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0" >> /dev/null
     else
-        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0"
+        sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0" >> /dev/null
     fi
     sudo umount -f -l $MOUNTDIR
     rm -rf $MOUNTDIR 
@@ -72,8 +72,8 @@ rebuild() {
 }
 
 shrink() {
-    e2fsck -f -y $NEWIMAGE
-    resize2fs -M $NEWIMAGE
+    e2fsck -f -y $NEWIMAGE >> /dev/null
+    resize2fs -M $NEWIMAGE >> /dev/null
 }
 
 if [[ $3 == "" ]]; then
