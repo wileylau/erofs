@@ -43,6 +43,7 @@ merge() {
 }
 
 clean() {
+        echo "[INFO] Cleaning product image"
         cd $PRODUCTDIR
         rm -rf apkcerts.txt
         rm -rf applist
@@ -63,6 +64,7 @@ clean() {
 }
 
 fconts() {
+        echo "[INFO] Grabbing file contexts"
         mkdir $LOCALDIR/system
         sudo mount -o loop -t erofs $RUNDIR/system.img $LOCALDIR/system
         sudo cat $LOCALDIR/system/system/etc/selinux/plat_file_contexts >> $fileconts
@@ -75,7 +77,6 @@ for partition in $PARTITIONS; do
         merge >> log.txt
 done
 
-echo "[INFO] Cleaning product image"
 clean
 fconts
 echo "[INFO] Rebuilding Product image"
