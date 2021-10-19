@@ -69,6 +69,7 @@ rebuild() {
     sudo umount -f -l $MOUNTDIR
     rm -rf $MOUNTDIR 
     sudo rm -rf $tmpdir
+    echo "[INFO] Done"
 }
 
 mount
