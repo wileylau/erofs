@@ -54,7 +54,7 @@ clean() {
         rm -rf etc
         rm -rf framework
         rm -rf lost+found
-        rm- rf media
+        rm -rf media
         rm -rf non_overlay
         rm -rf plugin
         rm -rf product_overlay
