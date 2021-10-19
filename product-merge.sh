@@ -75,7 +75,7 @@ for partition in $PARTITIONS; do
         merge >> log.txt
 done
 
-echo "[INFO] Deblotaing product image"
+echo "[INFO] Cleaning product image"
 clean
 fconts
 echo "[INFO] Rebuilding Product image"
