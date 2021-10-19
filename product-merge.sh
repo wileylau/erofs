@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PARTITION=product
-SIZE=$1
+# SIZE=$1
 
 rm -rf log.txt >> /dev/null
 touch log.txt
@@ -14,18 +14,19 @@ toolsdir="$LOCALDIR/tools"
 tmpdir="$LOCALDIR/tmp"
 fileconts="$tmpdir/plat_file_contexts"
 PRODUCTDIR=$LOCALDIR/product
+SIZECACHE="$tmpdir/size"
 
 echo "[INFO] Cleaning up existing build residue"
 rm -rf $PRODUCTDIR
 
-if [[ $1 == "" ]]; then
-    SIZE=4294967296
-else
-    SIZE=$1
-fi
+# if [[ $1 == "" ]]; then
+#     SIZE=4294967296
+# else
+#     SIZE=$1
+# fi
 
 usage() {
-    echo "sudo ./$0 <optional: image size>"
+    echo "sudo ./$0"
 }
 
 PARTITIONS="my_product my_engineering my_company my_carrier my_region my_heytap my_stock my_preload my_bigball my_manifest"
@@ -72,6 +73,13 @@ fconts() {
         rm -rf $LOCALDIR/system
 }
 
+getsize() {
+        echo "[INFO] Setting image size"
+        touch $SIZECACHE
+        du -sb $PRODUCTDIR >> $SIZECACHE
+        SIZE=$(cut -f1 $SIZECACHE)
+        echo "Image size will be $SIZE" >> log.txt
+}
 for partition in $PARTITIONS; do
         echo "[INFO] Merging $partition into product.img"
         merge >> log.txt
@@ -79,6 +87,7 @@ done
 
 clean
 fconts
+getsize
 echo "[INFO] Rebuilding Product image"
 sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0" >> log.txt
 echo "[INFO] Cleaning up"
