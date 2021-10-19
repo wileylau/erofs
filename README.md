@@ -1,13 +1,15 @@
 # OPlus image utilities #
 
-### Image rebuilding ###
+### Prerequisites ###
+- Linux running kernel 5.4 or up (check with `uname -a`)
 
+### Image rebuilding ###
+- Used to rebuild read-only erofs images into EXT4 mountable images.
+Usage:
 ` 
 sudo ./erofs.sh <path to original image> <image partition name>
 `
-
 For example, if I'm trying to make system_ext image ext4, I'll use the following command:
-
 `
 sudo ./erofs.sh system_ext.img system_ext
 `
@@ -18,7 +20,6 @@ sudo ./erofs.sh system_ext.img system_ext
 - Non-OPlus devices does NOT have `OPLUS_FEATURE_OVERLAY_MOUNT` implementation (and it is highly unrecommended to use it, as someone has bricked their devices before after implementing it). However, product image should NOT be empty (there is a system symlink pointing to `/product`). Therefore, this script is written to merge the my_* partitions into a single product image to replicate the `/product` behavior on OPlus devices.
 
 Usage:
-
 `
 sudo ./product-merge.sh
 `
@@ -27,7 +28,6 @@ sudo ./product-merge.sh
 - We will still have to merge my_* partitions after building the product image (as not all files exist in product image). The script will automatically merge the my_* partitions into system.
 
 Usage:
-
 `
 sudo ./oplus-merge.sh
 `
