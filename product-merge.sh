@@ -42,6 +42,26 @@ merge() {
         rm -rf $partition
 }
 
+clean() {
+        cd $PRODUCTDIR
+        rm -rf apkcerts.txt
+        rm -rf applist
+        rm -rf build.prop
+        rm -rf custom_info.txt
+        rm -rf decouping_wallpaper
+        rm -rf del*
+        rm -rf etc
+        rm -rf framework
+        rm -rf lost+found
+        rm- rf media
+        rm -rf non_overlay
+        rm -rf plugin
+        rm -rf product_overlay
+        rm -rf res
+        rm -rf vendor
+        cd $RUNDIR
+}
+
 fconts() {
         mkdir $LOCALDIR/system
         sudo mount -o loop -t erofs $RUNDIR/system.img $LOCALDIR/system
@@ -55,6 +75,8 @@ for partition in $PARTITIONS; do
         merge >> log.txt
 done
 
+echo "[INFO] Deblotaing product image"
+clean
 fconts
 echo "[INFO] Rebuilding Product image"
 sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0" >> log.txt
