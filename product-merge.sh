@@ -87,5 +87,5 @@ fconts
 getsize
 echo "[INFO] Rebuilding Product image"
 sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/$PARTITION" $SIZE $fileconts -j "0" -T "1230768000" -L "$PARTITION" -I "256" -M "/$PARTITION" -m "0" >> log.txt
-echo "[INFO] Cleaning up"
+echo "[INFO] Done! Cleaning up"
 rm -rf $PRODUCTDIR $tmpdir
