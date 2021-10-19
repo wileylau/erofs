@@ -75,10 +75,7 @@ fconts() {
 
 getsize() {
         echo "[INFO] Setting image size"
-        touch $SIZECACHE
-        du -sb $PRODUCTDIR >> $SIZECACHE
-        SIZE=$(cut -f1 $SIZECACHE)
-        echo "Image size will be $SIZE" >> log.txt
+        SIZE=`du -sk $PRODUCTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
 }
 for partition in $PARTITIONS; do
         echo "[INFO] Merging $partition into product.img"
