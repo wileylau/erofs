@@ -15,6 +15,7 @@ tmpdir="$LOCALDIR/tmp"
 fileconts="$tmpdir/plat_file_contexts"
 PRODUCTDIR=$LOCALDIR/product
 
+echo "[INFO] Cleaning up existing build residue"
 rm -rf $PRODUCTDIR
 
 if [[ $1 == "" ]]; then
