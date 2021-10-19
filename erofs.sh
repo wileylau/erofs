@@ -15,12 +15,6 @@ toolsdir="$LOCALDIR/tools"
 tmpdir="$LOCALDIR/tmp"
 fileconts="$tmpdir/plat_file_contexts"
 
-if [[ $3 == "" ]]; then
-    SIZE=4294967296
-else
-    SIZE=$3
-fi
-
 usage() {
     echo "sudo ./$0 <image path> <partition name>"
 }
@@ -66,7 +60,7 @@ rebuild() {
     echo "[INFO] Rebuilding $PARTITION as ext4 image..."
     cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/ >/dev/null 2>&1 
     contextfix
-    imagesize=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
+    SIZE=`du -sk $PRODUCTDIR | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
     if [[ $PARTITION == "system" ]]; then
         sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0" >> log.txt
     else
@@ -77,18 +71,5 @@ rebuild() {
     sudo rm -rf $tmpdir
 }
 
-shrink() {
-    e2fsck -f -y $NEWIMAGE >> log.txt
-    resize2fs -M $NEWIMAGE >> log.txt
-}
-
-if [[ $3 == "" ]]; then
-    mount
-    rebuild
-    echo "[INFO] Shrinking images..."
-    shrink >/dev/null 2>&1 
-    echo "[INFO] Done!"
-else
-    mount
-    rebuild
-fi
+mount
+rebuild
