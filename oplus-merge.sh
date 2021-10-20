@@ -16,26 +16,37 @@ merge() {
         mkdir $partition >/dev/null 2>&1
         mount -o loop -t erofs $partition.img $partition  >/dev/null 2>&1
         cd system/$partition/ >/dev/null 2>&1
-        cp -fpr ../$partition/apkcerts.txt . >/dev/null 2>&1
-        cp -fpr ../$partition/applist . >/dev/null 2>&1
-        cp -fpr ../$partition/build.prop . >/dev/null 2>&1
-        cp -fpr ../$partition/custom_info.txt . >/dev/null 2>&1
-        cp -fpr ../$partition/decouping_wallpaper . >/dev/null 2>&1
-        cp -fpr ../$partition/del* . >/dev/null 2>&1
-        cp -fpr ../$partition/etc . >/dev/null 2>&1
-        cp -fpr ../$partition/framework . >/dev/null 2>&1
-        cp -fpr ../$partition/lost+found . >/dev/null 2>&1
-        cp -fpr ../$partition/media . >/dev/null 2>&1
-        cp -fpr ../$partition/non_overlay . >/dev/null 2>&1
-        cp -fpr ../$partition/plugin . >/dev/null 2>&1
-        cp -fpr ../$partition/product_overlay . >/dev/null 2>&1
-        cp -fpr ../$partition/res . >/dev/null 2>&1
-        cp -fpr ../$partition/vendor . >/dev/null 2>&1
+        cp -fpr ../..//$partition/apkcerts.txt . >/dev/null 2>&1
+        cp -fpr ../../$partition/applist . >/dev/null 2>&1
+        cp -fpr ../../$partition/build.prop . >/dev/null 2>&1
+        cp -fpr ../../$partition/custom_info.txt . >/dev/null 2>&1
+        cp -fpr ../../$partition/decouping_wallpaper . >/dev/null 2>&1
+        cp -fpr ../../$partition/del* . >/dev/null 2>&1
+        cp -fpr ../../$partition/etc . >/dev/null 2>&1
+        cp -fpr ../../$partition/framework . >/dev/null 2>&1
+        cp -fpr ../../$partition/lost+found . >/dev/null 2>&1
+        cp -fpr ../../$partition/media . >/dev/null 2>&1
+        cp -fpr ../../$partition/non_overlay . >/dev/null 2>&1
+        cp -fpr ../../$partition/plugin . >/dev/null 2>&1
+        cp -fpr ../../$partition/product_overlay . >/dev/null 2>&1
+        cp -fpr ../../$partition/res . >/dev/null 2>&1
+        cp -fpr ../../$partition/vendor . >/dev/null 2>&1
         cd ../../ >/dev/null 2>&1
         umount -f -l $partition >/dev/null 2>&1
         rm -rf $partition/ >/dev/null 2>&1
 }
 
+odmerge() {
+        cd $RUNDIR
+        "[INFO] Merging odm into system"
+        mkdir odm >/dev/null 2>&1
+        mount -o loop -t erofs odm.img odm >/dev/null 2>&1
+        cd system >/dev/null 2>&1
+        cp -fpr ../odm/ . >/dev/null 2>&1
+        cd ..
+        umount -f -l odm  >/dev/null 2>&1
+        rm -rf odm  >/dev/null 2>&1
+}
 clean() {
         echo "[INFO] Cleaning up"
         umount -f -l $RUNDIR/system/
@@ -45,6 +56,7 @@ clean() {
 prep
 for partition in $PARTITIONS; do
     merge
+    odmerge
 done
 echo "[INFO] Done"
 clean
