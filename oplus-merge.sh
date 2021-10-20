@@ -38,7 +38,7 @@ merge() {
 
 clean() {
         echo "[INFO] Cleaning up"
-        umount $RUNDIR/system/
+        umount -f -l $RUNDIR/system/
         rm -rf $RUNDIR/system/
 }
 
