@@ -31,7 +31,7 @@ merge() {
         cp -fpr ../$partition/product_overlay . >/dev/null 2>&1
         cp -fpr ../$partition/res . >/dev/null 2>&1
         cp -fpr ../$partition/vendor . >/dev/null 2>&1
-        cd .. >/dev/null 2>&1
+        cd ../../ >/dev/null 2>&1
         umount -f -l $partition >/dev/null 2>&1
         rm -rf $partition/ >/dev/null 2>&1
 }
