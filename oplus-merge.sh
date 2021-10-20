@@ -18,7 +18,7 @@ merge() {
         cd system
         cp -fpr ../$partition/ .
         cd ..
-        umount $partition
+        umount -f -l $partition
         rm -rf $partition/
 }
 
