@@ -3,6 +3,12 @@
 # oplus merger
 
 RUNDIR=$(realpath .)
+prep() {
+        echo "[INFO] Setting up"
+        cd $RUNDIR
+        mkdir system
+        mount system.img system
+}
 PARTITIONS="my_carrier my_company my_engineering my_heytap my_manifest my_preload my_product my_region my_stock my_version special_preload my_bigball"
 merge() {
         cd $RUNDIR
@@ -16,7 +22,15 @@ merge() {
         rm -rf $partition/
 }
 
+clean() {
+        echo "[INFO] Cleaning up"
+        umount $RUNDIR/system/
+        rm -rf $RUNDIR/system/
+}
+
+prep
 for partition in $PARTITIONS; do
     merge
-    echo "[INFO] Done"
 done
+echo "[INFO] Done"
+clean
