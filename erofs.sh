@@ -48,7 +48,7 @@ contextfix() {
     echo "/version(/.*)?                       u:object_r:rootfs:s0" >> "$fileconts"
     if [[ $PARTITION != "system" ]]; then
         mkdir $LOCALDIR/system
-        sudo mount -o loop -t erofs $RUNDIR/system.img $LOCALDIR/system
+        sudo mount $RUNDIR/system.img $LOCALDIR/system
         sudo cat $LOCALDIR/system/system/etc/selinux/plat_file_contexts >> $fileconts
         sudo umount -f -l $LOCALDIR/system
         rm -rf $LOCALDIR/system
