@@ -13,13 +13,13 @@ PARTITIONS="my_carrier my_company my_engineering my_heytap my_manifest my_preloa
 merge() {
         cd $RUNDIR
         echo "[INFO] Merging $partition into system"
-        mkdir $partition
-        mount -o loop -t erofs $partition.img $partition 
-        cd system
-        cp -fpr ../$partition/ .
-        cd ..
-        umount -f -l $partition
-        rm -rf $partition/
+        mkdir $partition >/dev/null 2>&1
+        mount -o loop -t erofs $partition.img $partition  >/dev/null 2>&1
+        cd system >/dev/null 2>&1
+        cp -fpr ../$partition/ . >/dev/null 2>&1
+        cd .. >/dev/null 2>&1
+        umount -f -l $partition >/dev/null 2>&1
+        rm -rf $partition/ >/dev/null 2>&1
 }
 
 clean() {
