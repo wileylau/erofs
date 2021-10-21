@@ -43,6 +43,10 @@ odmerge() {
         mount -o loop -t erofs odm.img odm >/dev/null 2>&1
         cd system >/dev/null 2>&1
         cp -fpr ../odm/ . >/dev/null 2>&1
+        rm -rf odm/etc/ueventd*
+        rm -rf odm/etc/*.xml
+        rm -rf odm/vendor/
+        rm -rf odm/firmware/
         cd ..
         umount -f -l odm  >/dev/null 2>&1
         rm -rf odm  >/dev/null 2>&1
