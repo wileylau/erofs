@@ -38,7 +38,7 @@ merge() {
 
 odmerge() {
         cd $RUNDIR
-        "[INFO] Merging odm into system"
+        echo "[INFO] Merging odm into system"
         mkdir odm >/dev/null 2>&1
         mount -o loop -t erofs odm.img odm >/dev/null 2>&1
         cd system >/dev/null 2>&1
@@ -60,7 +60,7 @@ clean() {
 prep
 for partition in $PARTITIONS; do
     merge
-    odmerge
 done
+odmerge
 echo "[INFO] Done"
 clean
