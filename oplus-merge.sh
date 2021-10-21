@@ -54,8 +54,9 @@ odmerge() {
 }
 clean() {
         echo "[INFO] Cleaning up"
-        umount -f -l $RUNDIR/system/
-        rm -rf $RUNDIR/system/
+        cd $RUNDIR
+        umount -f -l system/
+        rm -rf system/
 }
 
 prep
@@ -64,4 +65,3 @@ for partition in $PARTITIONS; do
 done
 odmerge
 echo "[INFO] Done"
-clean
