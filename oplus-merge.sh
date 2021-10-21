@@ -42,6 +42,7 @@ odmerge() {
         mkdir odm >/dev/null 2>&1
         mount -o loop -t erofs odm.img odm >/dev/null 2>&1
         cd system >/dev/null 2>&1
+        rm -rf odm/
         cp -fpr ../odm/ . >/dev/null 2>&1
         rm -rf odm/etc/ueventd*
         rm -rf odm/etc/*.xml
