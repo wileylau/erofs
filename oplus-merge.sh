@@ -64,4 +64,5 @@ for partition in $PARTITIONS; do
     merge
 done
 odmerge
+clean
 echo "[INFO] Done"
