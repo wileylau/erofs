@@ -63,6 +63,6 @@ prep
 for partition in $PARTITIONS; do
     merge
 done
-odmerge
+#odmerge
 clean
 echo "[INFO] Done"
