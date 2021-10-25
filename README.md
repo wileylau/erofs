@@ -37,6 +37,7 @@ sudo ./oplus-merge.sh
 
 ### To-Do ###
 - Remove dependency of system file_contexts to build all images (we currently cat system filecontexts to the working file contexts to make the image resign properly)
+- Run checks on mounting image (It is reported by [Velosh](https://github.com/velosh) that sometimes mounting erofs images without `-o loop -t erofs` does not work. However it works on my PC, that's why I introduced [this commit](https://github.com/JamieHoSzeYui/oplus-utils/commit/d6b9b3621847117ca60691bd3749d9107f10c1b3). Will work on checks for it later.)
 
 ### Credits and Thanks ###
 
