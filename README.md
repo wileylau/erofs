@@ -1,7 +1,7 @@
 # OPlus image utilities #
 
 ### Prerequisites ###
-- Linux running kernel 5.4 or up (check with `uname -a`)
+- Linux running kernel 5.4 or up (check with `uname -r`)
 
 ### Image rebuilding ###
 - Used to rebuild read-only erofs images into EXT4 mountable images.
