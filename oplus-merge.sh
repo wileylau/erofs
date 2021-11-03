@@ -14,7 +14,7 @@ merge() {
         cd $RUNDIR
         echo "[INFO] Merging $partition into system"
         mkdir $partition >/dev/null 2>&1
-        mount -o loop -t erofs $partition.img $partition  >/dev/null 2>&1
+        mount -o loop -t auto $partition.img $partition  >/dev/null 2>&1
         cd system/$partition/ >/dev/null 2>&1
         cp -fpr ../..//$partition/apkcerts.txt . >/dev/null 2>&1
         cp -fpr ../../$partition/applist . >/dev/null 2>&1
@@ -40,7 +40,7 @@ odmerge() {
         cd $RUNDIR
         echo "[INFO] Merging odm into system"
         mkdir odm >/dev/null 2>&1
-        mount -o loop -t erofs odm.img odm >/dev/null 2>&1
+        mount -o loop -t auto odm.img odm >/dev/null 2>&1
         cd system >/dev/null 2>&1
         rm -rf odm/
         cp -fpr ../odm/ . >/dev/null 2>&1
