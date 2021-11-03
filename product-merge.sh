@@ -37,7 +37,7 @@ touch $fileconts
 
 merge() {
         mkdir $partition
-        mount -o loop -t erofs $partition.img $partition
+        mount -o loop -t auto $partition.img $partition
         cp -fpr $partition/* $PRODUCTDIR/
         umount -f -l $partition
         rm -rf $partition
@@ -67,7 +67,7 @@ clean() {
 fconts() {
         echo "[INFO] Grabbing file contexts"
         mkdir $LOCALDIR/system
-        sudo mount $RUNDIR/system.img $LOCALDIR/system
+        sudo mount -t auto $RUNDIR/system.img $LOCALDIR/system
         sudo cat $LOCALDIR/system/system/etc/selinux/plat_file_contexts >> $fileconts
         sudo umount -f -l $LOCALDIR/system
         rm -rf $LOCALDIR/system
