@@ -19,7 +19,7 @@ usage() {
     echo "sudo ./$0 <image path> <partition name>"
 }
 
-if [[ $1 == "" ]]; then 
+if [[ $2 == "" ]]; then 
     usage
 fi
 
