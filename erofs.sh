@@ -47,6 +47,29 @@ contextfix() {
     echo "/preavs(/.*)?                        u:object_r:rootfs:s0" >> "$fileconts"
     echo "/preload(/.*)?                       u:object_r:rootfs:s0" >> "$fileconts"
     echo "/version(/.*)?                       u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/(oppo_custom|my_custom)/theme_bak(/.*)? u:object_r:oppo_theme_data_file:s0
+    /(my_(engineering|version|product|company|preload|bigball|carrier|region|stock|heytap|manifest|custom)|special_preload)(/.*)?           u:object_r:system_file:s0
+    /(my_(engineering|version|product|company|preload|bigball|carrier|region|stock|heytap|custom)|special_preload)/overlay(/.*)?   u:object_r:vendor_overlay_file:s0
+    /(my_(engineering|version|product|company|preload|bigball|carrier|region|stock|heytap|custom)|special_preload)/non_overlay/overlay(/.*)?   u:object_r:vendor_overlay_file:s0
+    /(my_(engineering|version|product|company|preload|bigball|carrier|region|stock|heytap|custom)|special_preload)/vendor_overlay/[0-9]+/.*   u:object_r:vendor_file:s0
+    /(my_(engineering|version|product|company|preload|bigball|carrier|region|stock|heytap|custom)|special_preload)/vendor/etc(/.*)?    u:object_r:vendor_configs_file:s0
+    /(my_version|odm)/build.prop                                             u:object_r:vendor_file:s0
+    /(my_version|odm)/vendor_overlay/[0-9]+/lib(64)?(/.*)?    u:object_r:same_process_hal_file:s0
+    /(my_version|odm)/vendor_overlay/[0-9]+/etc/camera(/.*)?  u:object_r:same_process_hal_file:s0
+    /(my_version|odm)/vendor_overlay/[0-9]+/camera(/.*)?      u:object_r:vendor_file:s0
+    /(my_version|odm)/lib64/camera(/.*)?                      u:object_r:vendor_file:s0
+    /(my_version|odm)/vendor_overlay/lib?(/.*)?         u:object_r:same_process_hal_file:s0
+    /(my_version|odm)/vendor_overlay/lib(64)?(/.*)?     u:object_r:same_process_hal_file:s0
+    /my_manifest/build.prop u:object_r:vendor_file:s0
+    /my_company/theme_bak(/.*)? u:object_r:oem_theme_data_file:s0
+    /my_product/etc/project_info.txt                                   u:object_r:vendor_file:s0
+    /my_product/product_overlay/framework(/.*)?          u:object_r:system_file:s0
+    /my_product/product_overlay/etc/permissions(/.*)?    u:object_r:system_file:s0
+    /(vendor|my_engineering|system/vendor)/bin/factory	u:object_r:factory_exec:s0
+    /(vendor|my_engineering|system/vendor)/bin/pcba_diag	u:object_r:pcba_diag_exec:s0
+    /my_product/lib(64)?/libcolorx-loader\.so                                                   u:object_r:same_process_hal_file:s0
+    /my_product/vendor/firmware(/.*)      u:object_r:vendor_file:s0
+    /my_version/vendor/firmware(/.*)?      u:object_r:vendor_file:s0" >> "$fileconts"
     if [[ $PARTITION != "system" ]]; then
         mkdir $LOCALDIR/system
         sudo mount -t auto $RUNDIR/system.img $LOCALDIR/system
