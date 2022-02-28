@@ -31,6 +31,21 @@ mount() {
 }
 
 contextfix() {
+    echo "/3rdmodem(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/3rdmodemnvm(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/3rdmodemnvmbkp(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/cust(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/eng(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/hw_product(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/log(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/modem_log(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/patch_hw(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/preas(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/prets(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/pretvs(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/resetFactory.cfg(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/sec_storage(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/splash2(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/my_bigball(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/my_carrier(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/my_custom(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
