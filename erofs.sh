@@ -31,6 +31,8 @@ mount() {
 }
 
 contextfix() {
+    echo "/opconfig(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
+    echo "/opcust(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/3rdmodem(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/3rdmodemnvm(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
     echo "/3rdmodemnvmbkp(/.*)?                    u:object_r:rootfs:s0" >> "$fileconts"
