@@ -14,6 +14,8 @@ For example, if I'm trying to make system_ext image ext4, I'll use the following
 sudo ./erofs.sh system_ext.img system_ext
 `
 
+- IF you're running into issues like "not enough space to setup filesystem", specify filesystem size by adding the size (I recommend 64MB) after $2.
+
 ### Product image rebuilding ###
 - OPlus (previously oppo) has been being a jerk and adding a butt ton of useless so-called "optimizations" (porting killers). This is one of them.
 - In Android 12 (OxygenOS 12 at least), OPlus has added `OPLUS_FEATURE_OVERLAY_MOUNT` to "mount product partition from existing my_* partitions" (to save image space? idk). With this going on, the product image shipped with OTAs is a dummy image that could not be mounted.
