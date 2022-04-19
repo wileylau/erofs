@@ -87,7 +87,7 @@ contextfix() {
     /my_product/lib(64)?/libcolorx-loader\.so                                                   u:object_r:same_process_hal_file:s0
     /my_product/vendor/firmware(/.*)      u:object_r:vendor_file:s0
     /my_version/vendor/firmware(/.*)?      u:object_r:vendor_file:s0" >> "$fileconts"
-    if [[ $PARTITION != "system" ]]; then
+    if (( $PARTITION != "system" )); then
         mkdir $LOCALDIR/system
         sudo mount -t auto $RUNDIR/system.img $LOCALDIR/system
         sudo cat $LOCALDIR/system/system/etc/selinux/plat_file_contexts >> $fileconts
@@ -102,8 +102,9 @@ rebuild() {
     cp -fpr $(sudo find $MOUNTDIR | grep file_contexts) $tmpdir/ >/dev/null 2>&1 
     contextfix
     SIZE=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*2);printf $1}'`
-    if [[ $SIZE < 1474560 ]]; then
-        SIZE=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*5);printf $1}'`
+    if (( $SIZE < "1474560" )); then
+	SIZE=$(du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*7);printf $1}')
+    fi
     if [[ $PARTITION == "system" ]]; then
         sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0" >> log.txt
     else
