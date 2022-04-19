@@ -162,7 +162,7 @@ def ConstructE2fsCommands(args):
   if mke2fs_extended_opts:
     mke2fs_opts += ["-E", ','.join(mke2fs_extended_opts)]
   # Round down the filesystem length to be a multiple of the block size
-  blocks = int(args.fs_size) / BLOCKSIZE
+  blocks = int(float(args.fs_size)) / BLOCKSIZE
   mke2fs_cmd = (["mke2fs"] + mke2fs_opts +
                 ["-t", args.ext_variant, "-b", str(BLOCKSIZE), args.output_file,
                  str(blocks)])
