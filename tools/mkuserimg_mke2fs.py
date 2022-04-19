@@ -135,7 +135,7 @@ def ConstructE2fsCommands(args):
     e2fsdroid_opts += ["-S", args.file_contexts]
   if args.flash_erase_block_size:
     mke2fs_extended_opts.append("stripe_width={}".format(
-        int(float(args.flash_erase_block_size)) / BLOCKSIZE))
+        int(args.flash_erase_block_size) / BLOCKSIZE))
   if args.flash_logical_block_size:
     # stride should be the max of 8kb and the logical block size
     stride = max(int(args.flash_logical_block_size), 8192)
@@ -162,7 +162,7 @@ def ConstructE2fsCommands(args):
   if mke2fs_extended_opts:
     mke2fs_opts += ["-E", ','.join(mke2fs_extended_opts)]
   # Round down the filesystem length to be a multiple of the block size
-  blocks = int(args.fs_size) / BLOCKSIZE
+  blocks = int(float(args.fs_size)) / BLOCKSIZE
   mke2fs_cmd = (["mke2fs"] + mke2fs_opts +
                 ["-t", args.ext_variant, "-b", str(BLOCKSIZE), args.output_file,
                  str(blocks)])
