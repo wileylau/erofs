@@ -104,6 +104,7 @@ rebuild() {
     SIZE=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*2);printf $1}'`
     if (( $SIZE < 1474560 )); then
         SIZE=`du -sk $MOUNTDIR | awk '{$1*=1024;$1=int($1*7);printf $1}'`
+    fi
     if [[ $PARTITION == "system" ]]; then
         sudo $toolsdir/mkuserimg_mke2fs.py "$MOUNTDIR/" "$NEWIMAGE" ext4 "/" $SIZE $fileconts -j "0" -T "1230768000" -L "/" -I "256" -M "/" -m "0" >> log.txt
     else
