@@ -1,5 +1,7 @@
 # OPlus image utilities #
 
+# Discontinued for now due to various reasons, do NOT use! #
+
 ### Prerequisites ###
 - Linux running kernel 5.4 or up (check with `uname -r`)
 
